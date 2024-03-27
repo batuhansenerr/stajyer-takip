@@ -1,30 +1,30 @@
 package com.batuhansener.stajyerTakip.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.util.Set;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class Department {
-
+public class Comment {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private String id;
-    private String name;
-    @OneToMany(mappedBy = "department")
-    private Set<Mentor> mentors;
-
+    String id;
+    String name;
+    LocalDateTime releaseDate;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    User user;
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    Project project;
 }
