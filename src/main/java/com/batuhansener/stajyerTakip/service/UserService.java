@@ -4,6 +4,8 @@ import com.batuhansener.stajyerTakip.dto.request.auth.CreateUserRequest;
 import com.batuhansener.stajyerTakip.model.User;
 import com.batuhansener.stajyerTakip.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -68,6 +70,12 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> user = userRepository.findByUsername(username);
+        System.out.println(user.get().getId());
         return user.orElseThrow(EntityNotFoundException::new);
     }
+
+//    public Long getAuthenticatedUserId(){
+//        return jwtService.extractId();
+//    }
+
 }

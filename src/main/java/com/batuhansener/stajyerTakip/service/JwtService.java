@@ -1,6 +1,7 @@
 package com.batuhansener.stajyerTakip.service;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -17,6 +18,7 @@ import java.util.Map;
 @Service
 public class JwtService {
 
+    private String token;
     @Value("${jwt.key}")
     private String SECRET;
 
@@ -40,6 +42,8 @@ public class JwtService {
                 .getBody();
         return claims.getSubject();
     }
+
+
     private Date extractExpiration(String token) {
         Claims claims = Jwts
                 .parser()
@@ -51,13 +55,14 @@ public class JwtService {
     }
 
     private String createToken(Map<String, Object> claims, String userName) {
-        return Jwts.builder()
+        token =  Jwts.builder()
                 .setClaims(claims)
                 .setSubject(userName)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 10)) // 10 dakika
                 .signWith(getSignKey(), SignatureAlgorithm.HS256)
                 .compact();
+        return token;
     }
 
     private Key getSignKey() {
