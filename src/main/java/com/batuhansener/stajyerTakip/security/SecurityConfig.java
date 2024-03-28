@@ -48,7 +48,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(x ->
                         x.requestMatchers("/project/addNewProject", "/project/delete/**",
                                         "/project/edit/**").hasRole("MENTOR")
-                                .requestMatchers("/project/**").authenticated()
+                                .requestMatchers("/project/**", "/comment/**").authenticated()
                 )
                 .sessionManagement(x -> x.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
