@@ -1,28 +1,53 @@
 package com.batuhansener.stajyerTakip.service;
 
+import com.batuhansener.stajyerTakip.dto.ProjectDto;
+import com.batuhansener.stajyerTakip.dto.converter.ProjectDtoConverter;
 import com.batuhansener.stajyerTakip.dto.request.CreateProjectRequest;
-import com.batuhansener.stajyerTakip.model.Mentor;
+import com.batuhansener.stajyerTakip.model.Comment;
 import com.batuhansener.stajyerTakip.model.Project;
 import com.batuhansener.stajyerTakip.model.ProjectStatus;
+import com.batuhansener.stajyerTakip.model.User;
 import com.batuhansener.stajyerTakip.repository.ProjectRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Service
+@RequiredArgsConstructor
 public class ProjectService {
 
     private final ProjectRepository projectRepository;
-    private final MentorService mentorService;
+    private final UserService userService;
+    private final ProjectDtoConverter projectDtoConverter;
 
-    public ProjectService(ProjectRepository projectRepository, MentorService mentorService) {
-        this.projectRepository = projectRepository;
-        this.mentorService = mentorService;
+    public ProjectDto create(CreateProjectRequest request){
+        User user = userService.findAuthenticatedUser();
+
+        Project project = Project.builder().name(request.name()).users(new ArrayList<>()).initialDate(LocalDateTime.now())
+                .comments(new ArrayList<>()).projectStatus(ProjectStatus.ONGOING).build();
+        project = projectRepository.save(project);
+        user.getProjects().add(project);
+        userService.genericUpdateUser(user);
+
+        return projectDtoConverter.convert(addProjectUser(project, user));
     }
 
-    public Project create(CreateProjectRequest request){
-        Mentor mentor = mentorService.findMentorById(request.mentor_id());
-        Project project = Project.builder().name(request.name()).mentor(mentor).initialDate(LocalDateTime.now()).projectStatus(ProjectStatus.ONGOING).build();
-        return projectRepository.save(project);
+    public Project findProjectById(String id){
+        return projectRepository.findById(id).orElseThrow(()->new RuntimeException("proje yok"));
+    }
+
+    public void addProjectComment(Project project, Comment comment){
+        project.getComments().add(comment);
+        projectRepository.saveAndFlush(project);
+    }
+
+    public Project addProjectUser(Project project, User user){
+        project.getUsers().add(user);
+        return projectRepository.saveAndFlush(project);
     }
 }
