@@ -15,24 +15,20 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Mentor {
+public class Mentor{
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
-//    public Mentor(){
-//        super();
-//    }
 
     @OneToMany(mappedBy = "mentor", fetch = FetchType.LAZY)
     private Set<Intern> interns;
-//    @Id
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
     @ManyToOne
     @JoinColumn(name = "department_id")
     private Department department;
-    @OneToMany(mappedBy = "mentor")
-    private List<Project> projects;
+//    @OneToMany(mappedBy = "mentor")
+//    private List<Project> projects;
 }

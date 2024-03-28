@@ -19,7 +19,7 @@ public class Comment {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     String id;
-    String name;
+    String comment;
     LocalDateTime releaseDate;
     @ManyToOne
     @JoinColumn(name = "user_id")

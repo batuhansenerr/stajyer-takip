@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.List;
+
 @Entity
 @Data
 @Builder
@@ -14,14 +16,13 @@ public class Intern {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Mentor mentor;
-//    @Id
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
-    @ManyToOne
-    @JoinColumn(name = "project_id")
-    private Project project;
-
+//    @ManyToMany
+//    @JoinColumn(name = "project_id")
+//    private List<Project> project;
 }
