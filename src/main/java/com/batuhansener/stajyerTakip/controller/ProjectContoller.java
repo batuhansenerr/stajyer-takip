@@ -1,5 +1,6 @@
 package com.batuhansener.stajyerTakip.controller;
 
+import com.batuhansener.stajyerTakip.dto.ProjectDto;
 import com.batuhansener.stajyerTakip.dto.request.CreateProjectRequest;
 import com.batuhansener.stajyerTakip.model.Project;
 import com.batuhansener.stajyerTakip.service.MentorService;
@@ -21,7 +22,8 @@ public class ProjectContoller {
     }
 
     @PostMapping("/addNewProject")
-    public ResponseEntity<Project> createProject(@RequestBody CreateProjectRequest request){
+    public ResponseEntity<ProjectDto> createProject(@RequestBody CreateProjectRequest request){
+        System.out.println("noluyo");
         return ResponseEntity.ok(projectService.create(request));
     }
 
