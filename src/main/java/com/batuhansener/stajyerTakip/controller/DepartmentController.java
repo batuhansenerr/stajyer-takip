@@ -1,8 +1,7 @@
 package com.batuhansener.stajyerTakip.controller;
 
-import com.batuhansener.stajyerTakip.dto.DepartmentDto;
+import com.batuhansener.stajyerTakip.dto.response.DepartmentDto;
 import com.batuhansener.stajyerTakip.dto.request.CreateDepartmentRequest;
-import com.batuhansener.stajyerTakip.dto.request.UpdateDepartmentRequest;
 import com.batuhansener.stajyerTakip.service.DepartmentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

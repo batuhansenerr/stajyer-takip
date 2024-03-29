@@ -1,9 +1,8 @@
 package com.batuhansener.stajyerTakip.controller;
 
-import com.batuhansener.stajyerTakip.dto.CommentDto;
+import com.batuhansener.stajyerTakip.dto.response.CommentDto;
 import com.batuhansener.stajyerTakip.dto.request.CreateCommentRequest;
 import com.batuhansener.stajyerTakip.dto.request.UpdateCommentRequest;
-import com.batuhansener.stajyerTakip.model.Comment;
 import com.batuhansener.stajyerTakip.service.CommentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
