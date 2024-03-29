@@ -1,8 +1,7 @@
 package com.batuhansener.stajyerTakip.service;
 
-import com.batuhansener.stajyerTakip.dto.CommentDto;
+import com.batuhansener.stajyerTakip.dto.response.CommentDto;
 import com.batuhansener.stajyerTakip.dto.converter.CommentDtoConverter;
-import com.batuhansener.stajyerTakip.dto.converter.ProjectDtoConverter;
 import com.batuhansener.stajyerTakip.dto.request.CreateCommentRequest;
 import com.batuhansener.stajyerTakip.dto.request.UpdateCommentRequest;
 import com.batuhansener.stajyerTakip.exception.CommentNotFoundException;
@@ -11,7 +10,6 @@ import com.batuhansener.stajyerTakip.model.Project;
 import com.batuhansener.stajyerTakip.model.User;
 import com.batuhansener.stajyerTakip.repository.CommentRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

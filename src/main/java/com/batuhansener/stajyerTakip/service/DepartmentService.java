@@ -1,8 +1,7 @@
 package com.batuhansener.stajyerTakip.service;
 
-import com.batuhansener.stajyerTakip.dto.DepartmentDto;
+import com.batuhansener.stajyerTakip.dto.response.DepartmentDto;
 import com.batuhansener.stajyerTakip.dto.request.CreateDepartmentRequest;
-import com.batuhansener.stajyerTakip.dto.request.UpdateDepartmentRequest;
 import com.batuhansener.stajyerTakip.exception.DepartmentNotFoundException;
 import com.batuhansener.stajyerTakip.model.Department;
 import com.batuhansener.stajyerTakip.repository.DepartmentRepository;

@@ -1,6 +1,6 @@
 package com.batuhansener.stajyerTakip.service;
 
-import com.batuhansener.stajyerTakip.dto.InternDto;
+import com.batuhansener.stajyerTakip.dto.response.InternDto;
 import com.batuhansener.stajyerTakip.dto.converter.InternDtoConverter;
 import com.batuhansener.stajyerTakip.exception.MentorNotFoundException;
 import com.batuhansener.stajyerTakip.model.Intern;
@@ -27,7 +27,7 @@ public class InternService {
         return internRepository.findById(id).orElseThrow(()->new MentorNotFoundException("intern yok"));
     }
 
-    public InternDto assignIntern(Intern intern, Mentor mentor) {
+    public InternDto assignInternToMentor(Intern intern, Mentor mentor) {
         intern.setMentor(mentor);
         intern = internRepository.saveAndFlush(intern);
         return internDtoConverter.convert(intern);
