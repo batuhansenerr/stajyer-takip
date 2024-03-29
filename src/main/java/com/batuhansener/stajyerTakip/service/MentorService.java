@@ -1,16 +1,13 @@
 package com.batuhansener.stajyerTakip.service;
 
-import com.batuhansener.stajyerTakip.controller.MentorDtoConverter;
-import com.batuhansener.stajyerTakip.dto.MentorDto;
+import com.batuhansener.stajyerTakip.dto.converter.MentorDtoConverter;
+import com.batuhansener.stajyerTakip.dto.response.MentorDto;
 import com.batuhansener.stajyerTakip.exception.MentorNotFoundException;
 import com.batuhansener.stajyerTakip.model.Department;
 import com.batuhansener.stajyerTakip.model.Mentor;
 import com.batuhansener.stajyerTakip.model.User;
 import com.batuhansener.stajyerTakip.repository.MentorRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @Service

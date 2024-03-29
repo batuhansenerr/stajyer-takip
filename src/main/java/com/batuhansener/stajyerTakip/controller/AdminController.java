@@ -1,7 +1,7 @@
 package com.batuhansener.stajyerTakip.controller;
 
-import com.batuhansener.stajyerTakip.dto.InternDto;
-import com.batuhansener.stajyerTakip.dto.MentorDto;
+import com.batuhansener.stajyerTakip.dto.response.InternDto;
+import com.batuhansener.stajyerTakip.dto.response.MentorDto;
 import com.batuhansener.stajyerTakip.dto.request.AssignInternToMentorRequest;
 import com.batuhansener.stajyerTakip.dto.request.AssignMentorToDepartment;
 import com.batuhansener.stajyerTakip.model.Department;
@@ -32,7 +32,7 @@ public class AdminController {
     public ResponseEntity<InternDto> assignInternToMentor(@RequestBody AssignInternToMentorRequest request){
         Intern intern = internService.findInternById(request.intern_id());
         Mentor mentor = mentorService.findMentorById(request.mentor_id());
-        return ResponseEntity.ok(internService.assignIntern(intern, mentor));
+        return ResponseEntity.ok(internService.assignInternToMentor(intern, mentor));
     }
 
     @PostMapping("/assignMentorToDepartment")
