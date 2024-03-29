@@ -31,7 +31,7 @@ public class DepartmentService {
         return DepartmentDto.builder().id(department.getId()).name(department.getName()).build();
     }
 
-    private Department findDepartmentById(String id){
+    public Department findDepartmentById(String id){
         return departmentRepository.findById(id).orElseThrow(()->new DepartmentNotFoundException("Böyle bir departman yok"));
     }
 
@@ -39,8 +39,4 @@ public class DepartmentService {
         Department department = findDepartmentById(id);
         departmentRepository.delete(department);
     }
-
-//    public DepartmentDto updateDepartment(UpdateDepartmentRequest request) {
-//
-//    }
 }
