@@ -1,6 +1,6 @@
-package com.batuhansener.stajyerTakip.controller;
+package com.batuhansener.stajyerTakip.dto.converter;
 
-import com.batuhansener.stajyerTakip.dto.MentorDto;
+import com.batuhansener.stajyerTakip.dto.response.MentorDto;
 import com.batuhansener.stajyerTakip.dto.converter.MentorDepartmentConverter;
 import com.batuhansener.stajyerTakip.dto.converter.MentorInternConverter;
 import com.batuhansener.stajyerTakip.dto.converter.ProjectUserConverter;

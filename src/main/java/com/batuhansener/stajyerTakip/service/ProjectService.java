@@ -1,6 +1,6 @@
 package com.batuhansener.stajyerTakip.service;
 
-import com.batuhansener.stajyerTakip.dto.ProjectDto;
+import com.batuhansener.stajyerTakip.dto.response.ProjectDto;
 import com.batuhansener.stajyerTakip.dto.converter.ProjectDtoConverter;
 import com.batuhansener.stajyerTakip.dto.request.CreateProjectRequest;
 import com.batuhansener.stajyerTakip.model.Comment;
@@ -13,9 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -49,5 +46,9 @@ public class ProjectService {
     public Project addProjectUser(Project project, User user){
         project.getUsers().add(user);
         return projectRepository.saveAndFlush(project);
+    }
+
+    public Project genericUpdateProject(Project project) {
+        return projectRepository.save(project);
     }
 }

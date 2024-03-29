@@ -1,24 +1,23 @@
 package com.batuhansener.stajyerTakip.dto.converter;
 
-import com.batuhansener.stajyerTakip.dto.response.ProjectDto;
+import com.batuhansener.stajyerTakip.dto.UserProjectDto;
 import com.batuhansener.stajyerTakip.model.Project;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
 
+
 @Component
 @RequiredArgsConstructor
-public class ProjectDtoConverter {
+public class UserProjectConverter {
 
     private final ProjectCommentDtoConverter projectCommentDtoConverter;
-    private final ProjectUserConverter projectUserConverter;
 
-    public ProjectDto convert(Project project){
-        return ProjectDto.builder().id(project.getId()).name(project.getName()).score(project.getScore())
+    public UserProjectDto convert(Project project){
+        return UserProjectDto.builder().id(project.getId()).name(project.getName()).score(project.getScore())
                 .initialDate(project.getInitialDate()).finishDate(project.getFinishDate())
                 .projectStatus(project.getProjectStatus())
-                .users(project.getUsers().stream().map(projectUserConverter::convert).collect(Collectors.toList()))
                 .comments(project.getComments().stream().map(projectCommentDtoConverter::convert).collect(Collectors.toList())).build();
     }
 }

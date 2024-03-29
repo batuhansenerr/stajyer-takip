@@ -1,11 +1,13 @@
 package com.batuhansener.stajyerTakip.service;
 
+import com.batuhansener.stajyerTakip.dto.response.UserDto;
+import com.batuhansener.stajyerTakip.dto.converter.UserDtoConverter;
 import com.batuhansener.stajyerTakip.dto.request.auth.CreateUserRequest;
-import com.batuhansener.stajyerTakip.model.Intern;
-import com.batuhansener.stajyerTakip.model.Mentor;
+import com.batuhansener.stajyerTakip.model.Project;
 import com.batuhansener.stajyerTakip.model.User;
 import com.batuhansener.stajyerTakip.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,19 +21,14 @@ import java.util.HashSet;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     private final InternService internService;
     private final MentorService mentorService;
-
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder, InternService internService, MentorService mentorService) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.internService = internService;
-        this.mentorService = mentorService;
-    }
+    private final UserDtoConverter userDtoConverter;
 
     public Optional<User> getByUsername(String username) {
         return userRepository.findByUsername(username);
@@ -96,7 +93,12 @@ public class UserService implements UserDetailsService {
         return findUserById(findAuthenticatedUserId());
     }
 
-    public void genericUpdateUser(User user){
-        userRepository.saveAndFlush(user);
+    public User genericUpdateUser(User user){
+        return userRepository.saveAndFlush(user);
+    }
+
+    public UserDto assignInternToProject(User user, Project project){
+
+        return userDtoConverter.convert(genericUpdateUser(user));
     }
 }

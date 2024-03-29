@@ -1,7 +1,6 @@
 package com.batuhansener.stajyerTakip.dto.converter;
 
-import com.batuhansener.stajyerTakip.dto.CommentDto;
-import com.batuhansener.stajyerTakip.dto.ProjectCommentDto;
+import com.batuhansener.stajyerTakip.dto.response.CommentDto;
 import com.batuhansener.stajyerTakip.model.Comment;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
