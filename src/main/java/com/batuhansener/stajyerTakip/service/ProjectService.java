@@ -1,5 +1,6 @@
 package com.batuhansener.stajyerTakip.service;
 
+import com.batuhansener.stajyerTakip.dto.request.UpdateProjectRequest;
 import com.batuhansener.stajyerTakip.dto.response.ProjectDto;
 import com.batuhansener.stajyerTakip.dto.converter.ProjectDtoConverter;
 import com.batuhansener.stajyerTakip.dto.request.CreateProjectRequest;
@@ -50,5 +51,19 @@ public class ProjectService {
 
     public Project genericUpdateProject(Project project) {
         return projectRepository.save(project);
+    }
+
+    public ProjectDto update(UpdateProjectRequest request, String projectId) {
+        Project project = findProjectById(projectId);
+        project.setName(request.name());
+        if (request.project_status().equals(ProjectStatus.ONGOING.name())){
+            project.setProjectStatus(ProjectStatus.ONGOING);
+        }else if (request.project_status().equals(ProjectStatus.FINISHED.name())){
+            project.setProjectStatus(ProjectStatus.FINISHED);
+            project.setFinishDate(LocalDateTime.now());
+        }else if (request.project_status().equals(ProjectStatus.DROPPED.name())){
+            project.setProjectStatus(ProjectStatus.DROPPED);
+        }
+        return projectDtoConverter.convert(projectRepository.save(project));
     }
 }

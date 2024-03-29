@@ -43,11 +43,11 @@ public class SecurityConfig {
                                 .requestMatchers("/auth/admin").hasRole("ADMIN")
                 )
                 .authorizeHttpRequests(x ->
-                        x.requestMatchers("/department/addNewDepartment").hasRole("ADMIN")
+                        x.requestMatchers("/department/add").hasRole("ADMIN")
                 )
                 .authorizeHttpRequests(x ->
-                        x.requestMatchers("/project/addNewProject", "/project/delete/**",
-                                        "/project/edit/**").hasRole("MENTOR")
+                        x.requestMatchers("/project/add", "/project/delete/**",
+                                        "/project/update/**").hasRole("MENTOR")
                                 .requestMatchers("/project/**", "/comment/**").authenticated()
                 ).authorizeHttpRequests(x ->
                         x.requestMatchers("/admin/**").hasRole("ADMIN")

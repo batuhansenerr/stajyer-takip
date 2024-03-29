@@ -1,5 +1,6 @@
 package com.batuhansener.stajyerTakip.controller;
 
+import com.batuhansener.stajyerTakip.dto.request.UpdateProjectRequest;
 import com.batuhansener.stajyerTakip.dto.response.ProjectDto;
 import com.batuhansener.stajyerTakip.dto.response.UserDto;
 import com.batuhansener.stajyerTakip.dto.request.AssignUserToProjectRequest;
@@ -11,6 +12,7 @@ import com.batuhansener.stajyerTakip.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestClient;
 
 @RestController
 @RequestMapping("/project")
@@ -24,7 +26,6 @@ public class ProjectContoller {
 
     @PostMapping("/add")
     public ResponseEntity<ProjectDto> createProject(@RequestBody CreateProjectRequest request){
-        System.out.println("noluyo");
         return ResponseEntity.ok(projectService.create(request));
     }
 
@@ -42,5 +43,10 @@ public class ProjectContoller {
     public String getAllMentorProjects(){
 //        mentorService.findAuthenticatedMentor();
         return "selam";
+    }
+
+    @PostMapping("/update/{id}")
+    public ResponseEntity<ProjectDto> updateProject(@RequestBody UpdateProjectRequest request, @PathVariable String id){
+        return ResponseEntity.ok(projectService.update(request, id));
     }
 }
