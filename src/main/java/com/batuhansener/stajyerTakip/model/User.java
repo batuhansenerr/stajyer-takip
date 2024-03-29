@@ -53,6 +53,6 @@ public class User implements UserDetails {
                 inverseJoinColumns = @JoinColumn(name = "project_id")
     )
     private List<Project> projects;
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Comment> comments;
 }
