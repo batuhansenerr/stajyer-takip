@@ -1,4 +1,4 @@
-package com.batuhansener.stajyerTakip.dto;
+package com.batuhansener.stajyerTakip.dto.response;
 
 import com.batuhansener.stajyerTakip.model.Mentor;
 import lombok.Builder;

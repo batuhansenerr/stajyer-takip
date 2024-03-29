@@ -1,9 +1,7 @@
-package com.batuhansener.stajyerTakip.dto;
+package com.batuhansener.stajyerTakip.dto.response;
 
-import com.batuhansener.stajyerTakip.model.Project;
-import com.batuhansener.stajyerTakip.model.User;
+import com.batuhansener.stajyerTakip.dto.ProjectUserDto;
 import lombok.Builder;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 

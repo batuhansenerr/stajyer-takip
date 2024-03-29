@@ -1,5 +1,7 @@
-package com.batuhansener.stajyerTakip.dto;
+package com.batuhansener.stajyerTakip.dto.response;
 
+import com.batuhansener.stajyerTakip.dto.ProjectCommentDto;
+import com.batuhansener.stajyerTakip.dto.ProjectUserDto;
 import com.batuhansener.stajyerTakip.model.ProjectStatus;
 import com.batuhansener.stajyerTakip.model.User;
 import lombok.Builder;
