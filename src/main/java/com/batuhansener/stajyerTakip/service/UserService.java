@@ -1,9 +1,12 @@
 package com.batuhansener.stajyerTakip.service;
 
+import com.batuhansener.stajyerTakip.dto.response.InternDto;
 import com.batuhansener.stajyerTakip.dto.response.UserDto;
 import com.batuhansener.stajyerTakip.dto.converter.UserDtoConverter;
 import com.batuhansener.stajyerTakip.dto.request.auth.CreateUserRequest;
+import com.batuhansener.stajyerTakip.model.Intern;
 import com.batuhansener.stajyerTakip.model.Project;
+import com.batuhansener.stajyerTakip.model.Role;
 import com.batuhansener.stajyerTakip.model.User;
 import com.batuhansener.stajyerTakip.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -18,7 +21,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -100,5 +105,11 @@ public class UserService implements UserDetailsService {
     public UserDto assignInternToProject(User user, Project project){
 
         return userDtoConverter.convert(genericUpdateUser(user));
+    }
+
+    public List<UserDto> getAllInterns() {
+        List<UserDto> interns = userRepository.findByAuthoritiesContaining(Role.ROLE_INTERN)
+                .stream().map(userDtoConverter::convert).collect(Collectors.toList());
+        return interns;
     }
 }

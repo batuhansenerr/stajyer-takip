@@ -50,7 +50,7 @@ public class SecurityConfig {
                                         "/project/update/**").hasRole("MENTOR")
                                 .requestMatchers("/project/**", "/comment/**").authenticated()
                 ).authorizeHttpRequests(x ->
-                        x.requestMatchers("/admin/**").hasRole("ADMIN")
+                        x.requestMatchers("/admin/**", "/intern/**").hasRole("ADMIN")
                 )
                 .sessionManagement(x -> x.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
