@@ -9,6 +9,7 @@ import com.batuhansener.stajyerTakip.model.Comment;
 import com.batuhansener.stajyerTakip.model.Project;
 import com.batuhansener.stajyerTakip.model.User;
 import com.batuhansener.stajyerTakip.repository.CommentRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -52,6 +53,10 @@ public class CommentService {
         Comment comment = findCommentById(id);
         System.out.println(comment);
         if (isValidUser(user, comment)) {
+            System.out.println("valid");
+//            user.getComments().remove(comment);
+//            userService.genericUpdateUser(user);
+            projectService.deleteProjectComment(comment);
             commentRepository.delete(comment);
         }
     }
