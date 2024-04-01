@@ -1,5 +1,6 @@
 package com.batuhansener.stajyerTakip.dto.response;
 
+import com.batuhansener.stajyerTakip.dto.CommentProjectDto;
 import com.batuhansener.stajyerTakip.dto.ProjectUserDto;
 import lombok.Builder;
 
@@ -11,6 +12,6 @@ public record CommentDto(
         String comment,
         LocalDateTime releaseDate,
         ProjectUserDto user,
-        ProjectDto project
+        CommentProjectDto project
 ) {
 }

@@ -14,7 +14,6 @@ public record CommentProjectDto(
         LocalDateTime initialDate,
         LocalDateTime finishDate,
         int score,
-        ProjectStatus projectStatus,
-        List<User> users
+        ProjectStatus projectStatus
 ) {
 }

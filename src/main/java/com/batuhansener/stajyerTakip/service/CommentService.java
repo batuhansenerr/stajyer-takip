@@ -14,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -69,5 +71,10 @@ public class CommentService {
 
     public Comment findCommentById(String id){
         return commentRepository.findById(id).orElseThrow(()->new CommentNotFoundException("yorum yok"));
+    }
+
+    public List<CommentDto> getAllComments() {
+        List<Comment> comments = commentRepository.findAll();
+        return comments.stream().map(commentDtoConverter::convert).collect(Collectors.toList());
     }
 }

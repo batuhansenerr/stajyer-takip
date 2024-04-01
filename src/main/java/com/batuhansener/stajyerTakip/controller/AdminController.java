@@ -1,11 +1,8 @@
 package com.batuhansener.stajyerTakip.controller;
 
-import com.batuhansener.stajyerTakip.dto.response.InternDto;
-import com.batuhansener.stajyerTakip.dto.response.MentorDto;
+import com.batuhansener.stajyerTakip.dto.response.*;
 import com.batuhansener.stajyerTakip.dto.request.AssignInternToMentorRequest;
 import com.batuhansener.stajyerTakip.dto.request.AssignMentorToDepartment;
-import com.batuhansener.stajyerTakip.dto.response.ProjectDto;
-import com.batuhansener.stajyerTakip.dto.response.UserDto;
 import com.batuhansener.stajyerTakip.model.Department;
 import com.batuhansener.stajyerTakip.model.Intern;
 import com.batuhansener.stajyerTakip.model.Mentor;
@@ -28,6 +25,7 @@ public class AdminController {
     private final DepartmentService departmentService;
     private final MentorService mentorService;
     private final ProjectService projectService;
+    private final CommentService commentService;
 
     @PostMapping("/assignInternToMentor")
     public ResponseEntity<InternDto> assignInternToMentor(@RequestBody AssignInternToMentorRequest request){
@@ -51,5 +49,10 @@ public class AdminController {
     @GetMapping("/projects")
     public ResponseEntity<List<ProjectDto>> getAllProjects(){
         return ResponseEntity.ok(projectService.getAllProjects());
+    }
+
+    @GetMapping("/comments")
+    public ResponseEntity<List<CommentDto>> getAllComments(){
+        return ResponseEntity.ok(commentService.getAllComments());
     }
 }
