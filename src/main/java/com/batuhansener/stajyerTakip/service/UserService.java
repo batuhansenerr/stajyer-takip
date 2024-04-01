@@ -4,13 +4,12 @@ import com.batuhansener.stajyerTakip.dto.response.InternDto;
 import com.batuhansener.stajyerTakip.dto.response.UserDto;
 import com.batuhansener.stajyerTakip.dto.converter.UserDtoConverter;
 import com.batuhansener.stajyerTakip.dto.request.auth.CreateUserRequest;
-import com.batuhansener.stajyerTakip.model.Intern;
-import com.batuhansener.stajyerTakip.model.Project;
-import com.batuhansener.stajyerTakip.model.Role;
-import com.batuhansener.stajyerTakip.model.User;
+import com.batuhansener.stajyerTakip.model.*;
 import com.batuhansener.stajyerTakip.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Hibernate;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -111,5 +110,15 @@ public class UserService implements UserDetailsService {
         List<UserDto> interns = userRepository.findByAuthoritiesContaining(Role.ROLE_INTERN)
                 .stream().map(userDtoConverter::convert).collect(Collectors.toList());
         return interns;
+    }
+
+    public List<UserDto> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        return users.stream().map(userDtoConverter::convert).collect(Collectors.toList());
+    }
+
+    public void addUserComment(User user, Comment comment) {
+        user.getComments().add(comment);
+        userRepository.saveAndFlush(user);
     }
 }
