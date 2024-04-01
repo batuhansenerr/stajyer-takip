@@ -48,5 +48,8 @@ public class AdminController {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
-
+    @GetMapping("/projects")
+    public ResponseEntity<List<ProjectDto>> getAllProjects(){
+        return ResponseEntity.ok(projectService.getAllProjects());
+    }
 }

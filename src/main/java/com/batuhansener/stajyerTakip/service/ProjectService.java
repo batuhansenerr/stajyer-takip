@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -44,6 +46,12 @@ public class ProjectService {
         projectRepository.saveAndFlush(project);
     }
 
+    public void deleteProjectComment(Comment comment){
+        Project project = projectRepository.findProjectByComments(comment);
+        project.getComments().remove(comment);
+        projectRepository.saveAndFlush(project);
+    }
+
     public Project addProjectUser(Project project, User user){
         project.getUsers().add(user);
         return projectRepository.saveAndFlush(project);
@@ -65,5 +73,10 @@ public class ProjectService {
             project.setProjectStatus(ProjectStatus.DROPPED);
         }
         return projectDtoConverter.convert(projectRepository.save(project));
+    }
+
+    public List<ProjectDto> getAllProjects() {
+        List<Project> projects = projectRepository.findAll();
+        return projects.stream().map(projectDtoConverter::convert).collect(Collectors.toList());
     }
 }
