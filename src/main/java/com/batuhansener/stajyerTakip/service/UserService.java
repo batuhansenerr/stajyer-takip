@@ -1,6 +1,9 @@
 package com.batuhansener.stajyerTakip.service;
 
+import com.batuhansener.stajyerTakip.dto.ProjectUserDto;
+import com.batuhansener.stajyerTakip.dto.converter.ProjectUserConverter;
 import com.batuhansener.stajyerTakip.dto.response.InternDto;
+import com.batuhansener.stajyerTakip.dto.response.MentorDto;
 import com.batuhansener.stajyerTakip.dto.response.UserDto;
 import com.batuhansener.stajyerTakip.dto.converter.UserDtoConverter;
 import com.batuhansener.stajyerTakip.dto.request.auth.CreateUserRequest;
@@ -33,6 +36,7 @@ public class UserService implements UserDetailsService {
     private final InternService internService;
     private final MentorService mentorService;
     private final UserDtoConverter userDtoConverter;
+    private final ProjectUserConverter projectUserDtoConverter;
 
     public Optional<User> getByUsername(String username) {
         return userRepository.findByUsername(username);
@@ -102,7 +106,6 @@ public class UserService implements UserDetailsService {
     }
 
     public UserDto assignInternToProject(User user, Project project){
-
         return userDtoConverter.convert(genericUpdateUser(user));
     }
 
@@ -110,6 +113,12 @@ public class UserService implements UserDetailsService {
         List<UserDto> interns = userRepository.findByAuthoritiesContaining(Role.ROLE_INTERN)
                 .stream().map(userDtoConverter::convert).collect(Collectors.toList());
         return interns;
+    }
+
+    public List<UserDto> getAllMentors(){
+        List<UserDto> mentors = userRepository.findByAuthoritiesContaining(Role.ROLE_MENTOR)
+                .stream().map(userDtoConverter::convert).collect(Collectors.toList());
+        return mentors;
     }
 
     public List<UserDto> getAllUsers() {
@@ -120,5 +129,17 @@ public class UserService implements UserDetailsService {
     public void addUserComment(User user, Comment comment) {
         user.getComments().add(comment);
         userRepository.saveAndFlush(user);
+    }
+
+    public List<ProjectUserDto> getProjectUsers(Project project) {
+        List<User> users = userRepository.findByProjects(project);
+        System.out.println(users);
+        return users.stream().map(projectUserDtoConverter::convert).collect(Collectors.toList());
+    }
+
+    public List<ProjectUserDto> getProjectUsersByRole(Project project, Role role) {
+        List<User> users = userRepository.findByAuthoritiesContainingAndProjects(role, project);
+        System.out.println(users);
+        return users.stream().map(projectUserDtoConverter::convert).collect(Collectors.toList());
     }
 }

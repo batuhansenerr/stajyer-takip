@@ -16,6 +16,7 @@ public class UserProjectConverter {
 
     public UserProjectDto convert(Project project){
         return UserProjectDto.builder().id(project.getId()).name(project.getName()).score(project.getScore())
+                .requirements(project.getRequirements())
                 .initialDate(project.getInitialDate()).finishDate(project.getFinishDate())
                 .projectStatus(project.getProjectStatus())
                 .comments(project.getComments().stream().map(projectCommentDtoConverter::convert).collect(Collectors.toList())).build();
