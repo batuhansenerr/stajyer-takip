@@ -11,6 +11,7 @@ import java.util.List;
 public record CommentProjectDto(
         String id,
         String name,
+        String requirements,
         LocalDateTime initialDate,
         LocalDateTime finishDate,
         int score,

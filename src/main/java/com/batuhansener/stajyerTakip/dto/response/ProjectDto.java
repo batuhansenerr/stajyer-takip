@@ -15,6 +15,7 @@ import java.util.List;
 public record ProjectDto(
         String id,
         String name,
+        String requirements,
         LocalDateTime initialDate,
         LocalDateTime finishDate,
         int score,

@@ -15,6 +15,7 @@ public class CommentProjectDtoConverter {
 
     public CommentProjectDto convert(Project project){
         return CommentProjectDto.builder().id(project.getId()).name(project.getName()).score(project.getScore())
+                .requirements(project.getRequirements())
                 .initialDate(project.getInitialDate()).finishDate(project.getFinishDate())
                 .build();
     }

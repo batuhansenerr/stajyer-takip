@@ -6,7 +6,9 @@ import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Data
@@ -20,6 +22,7 @@ public class Project {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     String id;
     String name;
+    String requirements;
     LocalDateTime initialDate;
     LocalDateTime finishDate;
     int score;
@@ -35,4 +38,10 @@ public class Project {
     private List<User> users;
 //    @ManyToMany(mappedBy = "project")
 //    private List<Intern> interns;
+
+    public List<Comment> getSortedComments() {
+        return this.comments.stream()
+                .sorted(Comparator.comparing(Comment::getReleaseDate).reversed())
+                .collect(Collectors.toList());
+    }
 }
